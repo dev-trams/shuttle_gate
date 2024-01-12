@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:shuttle_gate/models/model_core.dart';
 import 'package:shuttle_gate/models/model_r1.dart';
 import 'package:shuttle_gate/services/service_api_core.dart';
+import 'package:shuttle_gate/widgets/columnorrow.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MainScreen extends StatefulWidget {
@@ -32,7 +34,8 @@ class _MainScreenState extends State<MainScreen> {
   int r3currentPosition = 0;
   int r4currentPosition = 0;
   int seconds = 3;
-  bool polyLineVisible = true;
+  bool polyLineVisible = false;
+  bool processState = true;
 
   @override
   void initState() {
@@ -58,13 +61,11 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('통학 셔틀 모니터링 시스템 BETA'),
-      ),
-      body: Column(
+      body: ColOrRowWidget(
+        state: MediaQuery.of(context).size.width > 600 ? true : false,
         children: [
           Flexible(
-            flex: 5,
+            flex: 2,
             child: FlutterMap(
               options: MapOptions(
                 center: LatLng(busRoute[currentPosition].latitude,
@@ -149,37 +150,66 @@ class _MainScreenState extends State<MainScreen> {
           ),
           Flexible(
             flex: 1,
-            child: FutureBuilder(
-              future: CoreApiService().fetchCoreData(),
-              builder: (builder, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      var busData = snapshot.data![index];
-                      return ListTile(
-                        title: Text(busData.bid),
-                      );
+            child: processState
+                ? FutureBuilder(
+                    future: CoreApiService().fetchCoreData(),
+                    builder: (builder, snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            var busData = snapshot.data![index];
+                            return Text(busData.bid!);
+                          },
+                        );
+                      } else {
+                        return Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const CircularProgressIndicator(
+                                color: Colors.blue,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Text(snapshot.hasData ? '로딩중...' : '데이터가 없습니다.')
+                            ],
+                          ),
+                        );
+                      }
                     },
-                  );
-                } else {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const CircularProgressIndicator(
-                          color: Colors.blue,
+                  )
+                : ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) => Center(
+                      child: Container(
+                        height: 60,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
-                        const SizedBox(
-                          height: 20,
+                        child: Row(
+                          children: [
+                            const Icon(Icons.directions_bus),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text('BUS00${index + 1}'),
+                                  Text('경복대 <-> 종점${index + 1}'),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                        Text(snapshot.hasData ? '로딩중...' : '데이터가 없습니다.')
-                      ],
+                      ),
                     ),
-                  );
-                }
-              },
-            ),
+                  ),
           )
         ],
       ),
@@ -196,7 +226,7 @@ class _MainScreenState extends State<MainScreen> {
       point: point ?? const LatLng(37.733255, 127.212641),
       builder: (ctx) => Icon(
         icon ?? Icons.bus_alert,
-        size: size ?? 50,
+        size: size ?? 25,
         color: Colors.white,
         shadows: [
           Shadow(
@@ -231,7 +261,7 @@ class _MainScreenState extends State<MainScreen> {
                   blurRadius: 20,
                 )
               ],
-              size: 50,
+              size: 30,
             ),
             SizedBox(
               child: Text(
