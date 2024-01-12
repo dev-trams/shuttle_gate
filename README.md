@@ -1,16 +1,93 @@
-# shuttle_gate
+# 경복대학교 셔틀버스 관리 플랫폼
 
-A new Flutter project.
+생성일: 2023년 11월 16일 오후 1:20
+태그: 개발 중
 
-## Getting Started
+## 개요
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+경복대학교 캡스톤 프로젝트로 진행하는 셔틀 버스 관리 플랫폼 재작에 관련된 문서를 정리합니다.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 1. 프로젝트 개요
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 1-1) 프로젝트 명
+
+---
+
+> **경복대학교 셔틀버스 관리 플랫폼**
+> 
+
+### 1-2) 프로젝트 목표
+
+---
+
+<aside>
+💡 **셔틀버스 관리 플랫폼 프로젝트의 주요 목표는** 학교에서 운영하는 셔틀 인프라의
+
+</aside>
+
+<aside>
+⚠️ **셔틀버스 관리 플랫폼 프로젝트는** 서버 보안 취약점을 탐지하고, 서버 상태를 직관적으로 시각화하여 관리자가 전문적인 IT 지식이 없어도 효율적으로 업무를 수행할 수 있는 솔루션입니다. 사용자는 간단한 버튼 조작으로 취약점 경고를 처리하고, 서버의 안전한 운영을 돕습니다.
+
+</aside>
+
+---
+
+## 1-3) 개발 기간 & 프로젝트 구성원
+
+> 2023-09-15 ~ 2024-02-04
+> 
+
+● 박건욱 (팀장 & WEB / PM)
+
+● 박도현 (팀원 & WEB / APP 개발)
+
+● 이동현  (팀원 & SEVER/DB 개발)
+
+## 2. 사용 기술 및 라이브러리
+
+## 2-1) APP
+
+- Android Studio / java
+    
+    APP브라우저
+    
+
+## 2-2) WEB
+
+- php / xampp
+    
+    WEB브라우
+    
+
+## 3)데이터베이스 설계
+
+- 데이터 베이스 설계
+    
+    
+    /
+    
+- 데이터 베이스 TABLE 구조
+    
+    App → DB
+    
+    | 칼럼ID | 칼럼명 |
+    | --- | --- |
+    | user | 탑승자 번호 순 |
+    | userName | 탑승자 이름 |
+    | userNumber | 탑승자 학번 |
+    | userPassword | 탑승자 학과 |
+
+## 4. 아키텍쳐 구성도
+
+- 4-1) 셔틀버스 구성도
+    
+    ![Untitled](%E1%84%80%E1%85%A7%E1%86%BC%E1%84%87%E1%85%A9%E1%86%A8%E1%84%83%E1%85%A2%E1%84%92%E1%85%A1%E1%86%A8%E1%84%80%E1%85%AD%20%E1%84%89%E1%85%A7%E1%84%90%E1%85%B3%E1%86%AF%E1%84%87%E1%85%A5%E1%84%89%E1%85%B3%20%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%E1%85%B5%20%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A2%E1%86%BA%E1%84%91%E1%85%A9%E1%86%B7%20e3db806197114321be63ef5ce80e0a84/Untitled.png)
+    
+
+## 5. 결과물
+
+- WEB 실행화면
+    
+    ![Untitled](%E1%84%80%E1%85%A7%E1%86%BC%E1%84%87%E1%85%A9%E1%86%A8%E1%84%83%E1%85%A2%E1%84%92%E1%85%A1%E1%86%A8%E1%84%80%E1%85%AD%20%E1%84%89%E1%85%A7%E1%84%90%E1%85%B3%E1%86%AF%E1%84%87%E1%85%A5%E1%84%89%E1%85%B3%20%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%E1%85%B5%20%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A2%E1%86%BA%E1%84%91%E1%85%A9%E1%86%B7%20e3db806197114321be63ef5ce80e0a84/Untitled%201.png)
